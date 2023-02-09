@@ -18,7 +18,7 @@ function TextInputRoot({ children }: TextInputRootProps) {
   );
 }
 
-TextInputRoot.displayName = "TextInput.Root";
+TextInputRoot.displayName = "TextInput";
 
 export interface TextInputIconProps {
   children: ReactNode;
@@ -44,8 +44,12 @@ function TextInputInput(props: TextInputInputProps) {
 
 TextInputInput.displayName = "TextInput.Input";
 
-export const TextInput = {
-  Root: TextInputRoot,
-  Input: TextInputInput,
-  Icon: TextInputIcon,
+export type TextInputProps = typeof TextInputRoot & {
+  Input: typeof TextInputInput;
+  Icon: typeof TextInputIcon;
 };
+
+export const TextInput = TextInputRoot as TextInputProps
+
+TextInput.Icon = TextInputIcon
+TextInput.Input = TextInputInput
